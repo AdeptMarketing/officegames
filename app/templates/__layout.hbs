@@ -52,7 +52,7 @@
 					  </ul>
 				  </li>
 				  <li class="standout">
-				  	<a href="">Create a Match</a>
+				  	<a href="/matches/create">Create a Match</a>
 				  </li>
 		      </ul>
 		  </nav><!-- .main-nav -->
@@ -63,6 +63,15 @@
     </section>
 
     <script src="/mergedAssets.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$('input[type=checkbox]').on('change', function(){
+			if($(this).is(":checked")) {
+				$(this).parent().addClass('selected');
+			}else{
+				$(this).parent().removeClass('selected');
+			}
+		});
+	</script>
     <script>
     (function() {
       var App = window.App = new (require('app/app'))({{json appData}});

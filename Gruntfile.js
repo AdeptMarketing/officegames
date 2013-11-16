@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             all: {
                 src: [ 'app/**/*.js'],
                 exclude: 'app/templates/compiledTemplates.js',
-                options: { failOnError: true },
+                options: { failOnError: false },
                 directives: {
                     browser: true,
                     node: true,

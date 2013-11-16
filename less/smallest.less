@@ -1,9 +1,14 @@
+@import 'chosen.less';
 @import 'bootstrap/bootstrap.less';
-@import 'layout.less';
+@import 'layout.less'; 
 
 .clear {
 	clear: both;
 }
+
+// ---------------------------------------------------------------------------------------- //
+//	DASHBOARD
+// ---------------------------------------------------------------------------------------- //
 .table {
 	thead {
 		tr {
@@ -34,51 +39,107 @@
 	}
 }
 
-.match {
-	width: 100%; 
+#recent-matches {
 	position: relative;
-	margin-bottom: 1em;
-	.player {
-		width: 70%;
-		padding: 10px;
-		float: right;
-		h3 {
-			font-weight: 100;
-			line-height: 1em;
-			margin: 5px 0 0 0;
+	.match {
+		width: 100%; 
+		position: relative;
+		margin-bottom: 1em;
+		.player {
+			width: 70%;
+			padding: 10px;
+			float: right;
+			h3 {
+				font-weight: 100;
+				line-height: 1em;
+				margin: 5px 0 0 0;
+			}
+			p {
+				margin: 0;
+				font-weight: 500;
+				font-size: .8em;
+			}
+			img {
+				float: left;
+				margin: 0 .5em 0 0;
+			}
+			border-left: 6px solid transparent;
+			&.winner {
+				background: #bbddb9;
+				border-left: 6px solid #266d21;
+			}
 		}
-		p {
-			margin: 0;
-			font-weight: 500;
-			font-size: .8em;
-		}
-		img {
-			float: left;
-			margin: 0 .5em 0 0;
-		}
-		border-left: 6px solid transparent;
-		&.winner {
-			background: #bbddb9;
-			border-left: 6px solid #266d21;
-		}
-	}
-	.activity {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 30%;
-		height: 100%;
-		display: block;
-		&.ping-pong {
-			background: url(../img/ping-pong.gif) center center no-repeat #e6e6e6;
-		}
-		&.darts {
-			background: url(../img/darts.gif) center center no-repeat #e6e6e6;
+		.activity {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 30%;
+			height: 100%;
+			display: block;
+			&.ping-pong {
+				background: url(../img/ping-pong.gif) center center no-repeat #e6e6e6;
+			}
+			&.darts {
+				background: url(../img/darts.gif) center center no-repeat #e6e6e6;
+			}
 		}
 	}
 }
 
 
+// ---------------------------------------------------------------------------------------- //
+//	CREATE A MATCH
+// ---------------------------------------------------------------------------------------- //
+#create-match {
+	input {
+		margin-bottom: 1em;
+	}
+	.vs {
+		width: 100%;
+		height: 1px;
+		border: 1px solid #eee;
+		margin-bottom: 2em;
+		position: relative;
+		&::after {
+			position: absolute;
+			top: -50%;
+			left: 50%;
+			margin: -20px 0 0 -20px;
+			content: 'VS';
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background: #fff;
+			border: 1px solid #eee;
+			color: #333;
+			text-align: center;
+			line-height: 40px;
+			z-index: 2;
+		}
+	}
+	.player {
+		float: left;
+		display: inline-block;
+		margin-bottom: 1em;
+		padding-bottom: 1em;
+		text-align: center;
+		color: @text-color;
+		opacity: .8;
+		img {
+			display: block;
+			margin: 1em auto;
+		}
+		&.selected, &:hover {
+			background: #eee;
+			text-decoration: none;
+			opacity: 1;
+		}
+	}
+	input[type="checkbox"] {
+		position: absolute;
+		left: -9999px;
+	}
+}
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) {
 	@import 'tablet.less';
