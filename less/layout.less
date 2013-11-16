@@ -1,0 +1,45 @@
+// NEED TO MERGE THIS FILE INTO SMALLEST.LESS (SEPERATE FOR NOW TO EASE MERGING)/////////////////////////////////
+
+// ---------------------------------------------------------------------------------------- //
+//	GENERAL LAYOUT
+// ---------------------------------------------------------------------------------------- //
+.container {
+	padding:0 35px;
+	max-width:auto;
+	width:auto;
+}
+header.app-header {
+	background-color:@header-bg;
+	.top {
+		background-color:@utilitybar-bg;
+	}
+}
+
+// ---------------------------------------------------------------------------------------- //
+//	NAVIGATION
+// ---------------------------------------------------------------------------------------- //
+nav.main-nav {
+	& > ul {
+		padding:0 35px;
+	}
+	.nav-tabs > li {margin-right:7px;}
+	.nav-tabs > li > a {
+		background:@tab-inactive-bg;
+		color:#666;
+	}
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+		background:#fff;
+	}
+	.nav .caret {
+		border-top-color: #666;
+		border-bottom-color: #666;
+	}
+	li.standout {
+		& > a {
+			padding-left:40px;
+			padding-right:40px;
+			background:@standout-tab-bg;
+			color:@standout-tab-color;
+		}
+	}
+}
