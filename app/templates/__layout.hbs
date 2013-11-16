@@ -3,27 +3,61 @@
 
   <head>
     <meta charset='utf-8'/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rendr Example App</title>
 
     <link href="/stylesheets/smallest.min.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
 
   <body class="">
-    <div class="navbar navbar-default">
-        <a class="admin" href="/admin">Admin</a>
-    </div>
+	  <header class="app-header">
+		  <div class="top">
+			  <div class="container">
+				  <nav class="util">
+					  <ul class="nav nav-pills">
+						  <li><a class="admin" href="/admin">Admin</a></li>
+					  </ul>
+				  </nav><!-- .util -->
+			  </div><!-- .container -->
+		  </div><!-- .top -->
+		  <div class="container">
+		      <section class="branding">
+		          <h1 class="logo">Office Name/Logo<h1>
+		      </section><!-- .branding -->
+		  </div><!-- .container -->
+		  <nav class="main-nav">
+		      <ul class="nav nav-tabs">
+		          <li class="active"><a href="/dashboard" data-toggle="tab">Dashboard</a></li>
+		          <li class="dropdown">
+					  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+						  Players <span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu" role="menu">
+						  <li><a href="/players">View All</a></li>
+					  </ul>
+				  </li>
+		          <li class="dropdown">
+					  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+						  Teams <span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu" role="menu">
+						  <li><a href="/teams">View All</a></li>
+					  </ul>
+				  </li>
+		          <li class="dropdown">
+					  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+						  Activities <span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu" role="menu">
+						  <li><a href="/activities">View All</a></li>
+					  </ul>
+				  </li>
+				  <li class="standout">
+				  	<a href="">Create a Match</a>
+				  </li>
+		      </ul>
+		  </nav><!-- .main-nav -->
+	  </header><!-- .app-header -->
 
-    <section class="branding">
-        <h1>Office Name/Logo<h1>
-    </section>
-
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="/dashboard" data-toggle="tab">Dashboard</a></li>
-        <li><a href="/players" data-toggle="tab">Players</a></li>
-        <li><a href="/teams" data-toggle="tab">Teams</a></li>
-        <li><a href="/activities" data-toggle="tab">Activities</a></li>
-    </ul>
     <section id="content" class="container">
         {{{body}}}
     </section>
