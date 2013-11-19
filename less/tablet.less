@@ -1,3 +1,6 @@
+// ---------------------------------------------------------------------------------------- //
+//	DASHBOARD
+// ---------------------------------------------------------------------------------------- //
 .table {
 	thead{
 		tr {
@@ -15,60 +18,77 @@
 					display: none;
 					padding: 0;
 				}
-				&:nth-of-type(1)::before {
-					display: none;
-				}
 			}
 		}
 	}
 }
 
-.match {
-	margin-bottom: 0;
-	.player {
-		width: 50%;
-		&.a {
-			float: left;
-			border-left: 6px solid transparent;
-			img {
-				float: left;
-				margin-right: .5em;
-			}
-		}
-		&.b {
-			float: right;
-			text-align: right; 
-			border-right: 6px solid transparent;
-			img {
-				float: right;
-				margin-left: .5em;
-			}
-		}
-		&.winner {
-			background: #bbddb9;
+#recent-matches {
+	.match {
+		margin-bottom: 0;
+		.player {
+			width: 50%;
 			&.a {
-				border-left: 6px solid #266d21;
+				float: left;
+				border-left: 6px solid transparent;
+				img {
+					float: left;
+					margin-right: .5em;
+				}
 			}
 			&.b {
-				border-right: 6px solid #266d21;
+				float: right;
+				text-align: right;
+				border-right: 6px solid transparent;
+				img {
+					float: right;
+					margin-left: .5em;
+				}
+			}
+			&.winner {
+				background: #bbddb9;
+				&.a {
+					border-left: 6px solid #266d21;
+				}
+				&.b {
+					border-right: 6px solid #266d21;
+				}
+			}
+		}
+		.activity {
+			display: block;
+			width: 76px;
+			height: 76px;
+			float: left;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			margin-left: -38px;
+			border-bottom: 1px solid #dfdfdf;
+			&.ping-pong {
+				background: url(../img/ping-pong.gif) center center no-repeat #e6e6e6;
+			}
+			&.darts {
+				background: url(../img/darts.gif) center center no-repeat #e6e6e6;
 			}
 		}
 	}
-	.activity {
-		display: block;
-		width: 76px;
-		height: 76px;
-		float: left;
+}
+
+// ---------------------------------------------------------------------------------------- //
+//	CREATE A MATCH
+// ---------------------------------------------------------------------------------------- //
+#create-match {
+	position: relative;
+	.vs {
 		position: absolute;
-		top: 0;
 		left: 50%;
-		margin-left: -38px;
-		border-bottom: 1px solid #dfdfdf;
-		&.ping-pong {
-			background: url(../img/ping-pong.gif) center center no-repeat #e6e6e6;
-		}
-		&.darts {
-			background: url(../img/darts.gif) center center no-repeat #e6e6e6;
+		margin-left: -1px;
+		height: 100%;
+		width: 1px;
+		margin-bottom: 0;
+		&::after {
+			top: 50%;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-var Knex = require('knex'),
+var Bookshelf = require('bookshelf'),
     _ = require('underscore'),
     when = require('when'),
     path = require('path'),
@@ -8,23 +8,24 @@ var Knex = require('knex'),
     config = require('config'),
     DataAdapter = (require('rendr/server/data_adapter'));
 
-var KnexAdapter = function (conf) {
-    if (!Knex.knex) {
-        Knex.knex = Knex.initialize(conf);
+var BookshelfAdapter = function (conf) {
+    if (!Bookshelf.instance) {
+        //Bookshelf.instance = Bookshelf.initialize(_.extend({debug: true}, conf));
+        Bookshelf.instance = Bookshelf.initialize(conf);
     }
 
-    this.knex = Knex.knex;
+    this.instance = Bookshelf.instance;
 };
 
-util.inherits(KnexAdapter, DataAdapter);
+util.inherits(BookshelfAdapter, DataAdapter);
 
-KnexAdapter.prototype.setupTables = function () {
+BookshelfAdapter.prototype.setupTables = function () {
     var self = this;
     return when.all([
 
-        self.knex.schema.hasTable('players').then(function (exists) {
+        self.instance.knex.schema.hasTable('players').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('players', function (table) {
+                return self.instance.knex.schema.createTable('players', function (table) {
                     console.log('Creating players table');
                     table.increments().primary();
                     table.string('name').unique();
@@ -34,9 +35,9 @@ KnexAdapter.prototype.setupTables = function () {
             }
         }),
 
-        self.knex.schema.hasTable('teams').then(function (exists) {
+        self.instance.knex.schema.hasTable('teams').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('teams', function (table) {
+                return self.instance.knex.schema.createTable('teams', function (table) {
                     console.log('Creating teams table');
                     table.increments().primary();
                     table.string('name');
@@ -45,9 +46,9 @@ KnexAdapter.prototype.setupTables = function () {
             }
         }),
 
-        self.knex.schema.hasTable('players_teams').then(function (exists) {
+        self.instance.knex.schema.hasTable('players_teams').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('players_teams', function (table) {
+                return self.instance.knex.schema.createTable('players_teams', function (table) {
                     console.log('Creating players_teams table');
                     table.increments().primary();
                     table.integer('player_id').notNullable();
@@ -56,9 +57,9 @@ KnexAdapter.prototype.setupTables = function () {
             }
         }),
 
-        self.knex.schema.hasTable('matches').then(function (exists) {
+        self.instance.knex.schema.hasTable('matches').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('matches', function (table) {
+                return self.instance.knex.schema.createTable('matches', function (table) {
                     console.log('Creating matches table');
                     table.increments().primary();
                     table.integer('activity_id');
@@ -68,9 +69,9 @@ KnexAdapter.prototype.setupTables = function () {
             }
         }),
 
-        self.knex.schema.hasTable('matches_teams').then(function (exists) {
+        self.instance.knex.schema.hasTable('matches_teams').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('matches_teams', function (table) {
+                return self.instance.knex.schema.createTable('matches_teams', function (table) {
                     console.log('Creating matches_teams table');
                     table.increments().primary();
                     table.integer('match_id').notNullable();
@@ -80,9 +81,9 @@ KnexAdapter.prototype.setupTables = function () {
             }
         }),
 
-        self.knex.schema.hasTable('activities').then(function (exists) {
+        self.instance.knex.schema.hasTable('activities').then(function (exists) {
             if (!exists) {
-                return self.knex.schema.createTable('activities', function (table) {
+                return self.instance.knex.schema.createTable('activities', function (table) {
                     console.log('Creating activities table');
                     table.increments().primary();
                     table.string('name');
@@ -95,7 +96,7 @@ KnexAdapter.prototype.setupTables = function () {
 
 };
 
-KnexAdapter.prototype.request = function (req, api, options, callback) {
+BookshelfAdapter.prototype.request = function (req, api, options, callback) {
     /*jslint unparam:true*/
 
     /**
@@ -107,13 +108,19 @@ KnexAdapter.prototype.request = function (req, api, options, callback) {
     }
 
     if (api.method === 'GET') {
-        var table = api.path.substr(1);
-        this.knex(table).select().then(function (rows) {
-            // there's gotta be a better way to create a response
-            var fakeResponse = {
-                statusCode: 200
-            };
-            callback(null, fakeResponse, rows);
+        var table = api.path.substr(1),
+            BookshelfCollection = require('../bookshelf/' + table).Collection,
+            bookshelfCollection = _.reduce(
+                api.query.querymod,
+                function (bcol, qm) {
+                    return bcol.query.apply(bcol, qm);
+                },
+                new BookshelfCollection()
+            );
+
+        bookshelfCollection.fetch(api.query.fetchmod ? _.clone(api.query.fetchmod) : {}).then(function (collection) {
+            //console.log(util.inspect(collection.toJSON(), {colors: true, depth: 6}));
+            callback(null, {statusCode: 200}, collection.toJSON());
         }, function (err) {
             callback(err, {statusCode: 500}, "knex error");
         });
@@ -121,4 +128,4 @@ KnexAdapter.prototype.request = function (req, api, options, callback) {
 
 };
 
-module.exports = KnexAdapter;
+module.exports = BookshelfAdapter;

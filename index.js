@@ -3,7 +3,7 @@ var express = require('express'),
     _ = require('underscore'),
     config = require('config'),
     path = require('path'),
-    knexAdapter = new (require('./app/lib/knex_adapter'))(config.db['default']),
+    bookshelfAdapter = new (require('./app/lib/bookshelf_adapter'))(config.db['default']),
     lessmw = require('less-middleware')({
         src: path.join(__dirname, 'less'),
         dest: path.join(__dirname, 'public', 'stylesheets'),
@@ -25,7 +25,7 @@ app.use(express.bodyParser());
  * Initialize our Rendr server.
  */
 var server = rendr.createServer({
-    dataAdapter: knexAdapter,
+    dataAdapter: bookshelfAdapter,
     appData: config.appData
 });
 
@@ -58,8 +58,7 @@ function start() {
  */
 if (require.main === module) {
     // setup tables
-    //console.log(knexAdapter.setupTables().then());
-    knexAdapter.setupTables().then(function () {
+    bookshelfAdapter.setupTables().then(function () {
         start();
     }, function () {
         console.error('There was an error setting up the database. Not starting server.');

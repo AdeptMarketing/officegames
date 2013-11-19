@@ -21,7 +21,7 @@
 		  </div><!-- .top -->
 		  <div class="container">
 		      <section class="branding">
-		          <h1 class="logo">Office Name/Logo<h1>
+		          <h1 class="logo">Office Name/Logo</h1>
 		      </section><!-- .branding -->
 		  </div><!-- .container -->
 		{{view "shared/navigation"}}
@@ -32,6 +32,15 @@
     </section>
 
     <script src="/mergedAssets.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$('input[type=checkbox]').on('change', function(){
+			if ($(this).is(":checked")) {
+				$(this).parent().addClass('selected');
+			} else {
+				$(this).parent().removeClass('selected');
+			}
+		});
+	</script>
     <script>
     (function() {
       var App = window.App = new (require('app/app'))({{json appData}});
