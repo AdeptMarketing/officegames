@@ -7,6 +7,11 @@ var _ = require('underscore'),
 module.exports = {
     index: function (params, callback) {
         "use strict";
+
+        if (this.app.req) {
+            this.app.req.res.locals.nav = { dashboard: true };
+        }
+
         var spec = {
             collection: {collection: 'matches', params: _.extend({
                 querymod: [ ['limit', 5], ['orderBy', 'created_at', 'desc'] ],

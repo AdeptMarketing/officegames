@@ -51,6 +51,9 @@ function start() {
         app.get('env'));
 }
 
+// app.locals can be used to set variables accessible in __layout's context
+// i.e. app.locals.officeName = config.office.name
+// see https://github.com/airbnb/rendr/pull/183 if that doesn't work
 
 /**
  * Only start server if this script is executed, not if it's require()'d.
