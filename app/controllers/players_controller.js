@@ -3,6 +3,11 @@ var _ = require('underscore');
 module.exports = {
     index: function (params, callback) {
         "use strict";
+
+        if (this.app.req) {
+            this.app.req.res.locals.nav = { players: true };
+        }
+
         var spec = {
             collection: {collection: 'Players', params: params}
         };

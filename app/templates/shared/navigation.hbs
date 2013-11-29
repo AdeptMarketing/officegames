@@ -1,30 +1,38 @@
 <ul class="nav nav-tabs">
-    <li class="active"><a href="/dashboard" data-toggle="tab">Dashboard</a></li>
-    <li class="dropdown">
+
+    <li{{#if nav.dashboard}} class="active"{{/if}} id="tab-dashboard">
+        <a data-tab="dashboard" class="tab-link" href="#">Dashboard</a>
+    </li>
+
+    <li class="{{#if nav.players}}active {{/if}}dropdown" id="tab-players">
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
             Players <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="/players">View All</a></li>
+            <li><a data-tab="players" class="tab-link" href="#">View All</a></li>
         </ul>
     </li>
-    <li class="dropdown">
+
+    <li class="{{#if nav.teams}}active {{/if}}dropdown" id="tab-teams">
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
             Teams <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="/teams">View All</a></li>
+            <li><a data-tab="teams" href="#" class="tab-link">View All</a></li>
         </ul>
     </li>
-    <li class="dropdown">
+
+    <li class="{{#if nav.activities}}active {{/if}}dropdown" id="tab-activities">
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
             Activities <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="/activities">View All</a></li>
+            <li><a data-tab="activities" href="#" class="tab-link">View All</a></li>
         </ul>
     </li>
+
     <li class="standout">
         <a href="/matches/create">Create a Match</a>
     </li>
+
 </ul>

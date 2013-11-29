@@ -18,6 +18,9 @@ module.exports = function (Handlebars) {
     return {
         copyright: function (year) {
             return new Handlebars.SafeString("&copy;" + year);
+        },
+        debug: function (options) {
+            console.log(this, options);
         }
     };
 };

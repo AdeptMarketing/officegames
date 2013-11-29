@@ -14,14 +14,12 @@ module.exports = {
     create: function (params, callback) {
         "use strict";
         /*jslint unparam:true */
-        //var spec = {
-        //    model: {model: 'Match', params: params},
-        //    //repos: {collection: 'Repos', params: {match: params.login}}
-        //};
-        //this.app.fetch(spec, function (err, result) {
-        //    callback(err, result);
-        //});
-        callback();
+        var spec = {
+            collection: {collection: 'Players', params: params}
+        };
+        this.app.fetch(spec, function (err, result) {
+            callback(err, result);
+        });
     },
 
     show: function (params, callback) {
