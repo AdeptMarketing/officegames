@@ -1,6 +1,6 @@
 var Bookshelf = require('bookshelf').instance;
 
-exports.Model = Bookshelf.Model.extend({
+var Model = Bookshelf.Model.extend({
 
     tableName: 'activities',
 
@@ -8,3 +8,10 @@ exports.Model = Bookshelf.Model.extend({
 
 });
 
+exports.Model = Model;
+
+exports.Collection = Bookshelf.Collection.extend({
+
+    model: Model
+
+});

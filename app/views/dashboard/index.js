@@ -1,6 +1,5 @@
 var BaseView = require('../base'),
-    _ = require('underscore'),
-    Backbone = require('backbone');
+    _ = require('underscore');
 
 module.exports = BaseView.extend({
     className: 'dashboard_index_view'

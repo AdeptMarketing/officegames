@@ -15,7 +15,8 @@ module.exports = {
         "use strict";
         /*jslint unparam:true */
         var spec = {
-            collection: {collection: 'Players', params: params}
+            collection: {collection: 'Players', params: params},
+            activities: {collection: 'Activities', params: params}
         };
         this.app.fetch(spec, function (err, result) {
             callback(err, result);

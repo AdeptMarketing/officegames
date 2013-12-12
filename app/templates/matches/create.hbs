@@ -32,4 +32,15 @@
             <div class="clear"></div>
         </div> <!-- col -->
     </div> <!-- row -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Activity</h2>
+            <select name="activity" id="activity">
+            {{#each activities}}
+                <option value="{{id}}">{{name}}</option>
+            {{/each}}
+            </select>
+        </div>
+    </div>
 </form>
